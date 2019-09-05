@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="csu.demo.dao.AreaDAO">
+    <insert id="addArea" parameterType="String">
+        INSERT INTO area(areaName)
+        value
+        (#{areaName})
+    </insert>
+    <delete id="deleteArea" parameterType="int">
+        DELETE FROM area
+        WHERE areaID=#{areaID}
+    </delete>
+    <select id="getAreas" resultType="Area">
+        SELECT areaID,areaName
+        FROM area
+        ORDER BY areaID ASC
+    </select>
+</mapper>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>主题</title>
+</head>
+<body>
+<table>
+    <tr>
+        <td>用户</td>
+        <td>内容</td>
+        <td>楼层</td>
+        <td></td>
+    </tr>
+    <tr th:each="floor:${floorList}">
+        <td th:text="${floor.account}">用户</td>
+        <td th:text="${floor.content}">内容</td>
+        <td th:text="${floor.floorNumber}">楼层</td>
+        <td th:if="${floor.floorNumber==1&&session.user.userType==0}">
+            <a href="#" th:attr="href='deleteArticle?articleID='+${floor.articleID}">删除该主题</a>
+        </td>
+        <td><a href="#" th:attr="href='deleteFloor?articleID='+${floor.articleID}+'&floorNumber='+${floor.floorNumber}"
+               th:if="${(floor.account==session.user.account||session.user.userType==0)&&floor.floorNumber>1}">
+            删除该楼层
+        </a> </td>
+    </tr>
+</table>
+<form action="/forum/addFloor" type="post">
+    跟帖：<textarea name="content" maxlength="120" required cols="40" rows="3" placeholder="最多120字"></textarea><br/>
+    <input type="submit" value="提交"/>
+</form>
+</body>
+</html>

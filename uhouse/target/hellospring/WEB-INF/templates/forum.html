@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>论坛首页</title>
+</head>
+<body>
+<form action="/forum/addArea" type="post" th:unless="${session.user.userType}">
+    新建版区：<input type="text" required name="areaName"/>
+    <input type="submit" value="提交"/>
+</form>
+<table>
+    <tr>
+        <th>Area Name</th>
+        <th>进入</th>
+        <th th:unless="${session.user.userType}">删除该版区</th>
+    </tr>
+    <tr th:each="area:${areaList}">
+        <td th:text="${area.areaName}"></td>
+        <td><a href="#" th:attr="href='/forum/toArea?areaID='+${area.areaID}">
+            进入该版区
+        </a></td>
+        <td th:unless="${session.user.userType}"><a th:attr="href='deleteArea?areaID='+${area.getAreaID()}">删除该版区</a></td>
+    </tr>
+</table>
+</body>
+</html>

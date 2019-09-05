@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="csu.demo.dao.ArticleDAO">
+    <select id="getArticleByAreaID" parameterType="int" resultType="Article">
+        SELECT articleID,title,areaID,account,floors
+        FROM article
+        WHERE areaID=#{areaID}
+        ORDER BY articleID DESC
+    </select>
+    <select id="getFloors" parameterType="int" resultType="int">
+        SELECT floors
+        FROM article
+        WHERE articleID=#{articleID}
+    </select>
+    <insert id="addArticle" parameterType="Article" useGeneratedKeys="true" keyProperty="articleID">
+        INSERT article(title,areaID,account,floors)
+        VALUE
+        (#{title},#{areaID},#{account},1)
+    </insert>
+    <delete id="deleteArticle" parameterType="int">
+        DELETE FROM article
+        WHERE articleID=#{articleID}
+    </delete>
+    <update id="updateArticle" parameterType="int">
+        UPDATE article
+        SET floors = floors + 1
+        WHERE articleID=#{articleID}
+    </update>
+</mapper>

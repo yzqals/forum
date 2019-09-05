@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="csu.demo.dao.FloorDAO">
+    <insert id="addFloor" parameterType="Floor">
+        INSERT floor(articleID,floorNumber,account,content)
+        value (#{articleID},#{floorNumber},#{account},#{content})
+    </insert>
+    <select id="getFloorByArticleID" parameterType="int" resultType="Floor">
+        SELECT articleID,floorNumber,account,content
+        FROM floor
+        WHERE articleID=#{articleID}
+        ORDER BY floorNumber
+    </select>
+    <delete id="deleteFloorByFloor" parameterType="Floor">
+        DELETE
+        FROM floor
+        WHERE articleID=#{articleID} AND floorNumber=#{floorNumber}
+    </delete>
+</mapper>

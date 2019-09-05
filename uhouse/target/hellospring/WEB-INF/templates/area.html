@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>版区</title>
+</head>
+<body>
+<a href="/forum/toAddArticle">创建新主题</a>
+<table>
+    <tr>
+        <th>主题名</th>
+        <th>发帖人</th>
+    </tr>
+    <tr th:each="article:${articleList}">
+        <td><a href="#" th:attr="href='toArticle?articleID='+${article.articleID}" th:text="${article.title}"></a></td>
+        <td th:text="${article.account}"></td>
+    </tr>
+</table>
+</body>
+</html>
