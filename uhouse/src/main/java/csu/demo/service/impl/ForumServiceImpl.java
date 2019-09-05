@@ -35,10 +35,10 @@ public class ForumServiceImpl implements ForumService {
     }
 
     @Override
-    public void addFloor(Floor floor) {
-        articleDAO.updateArticle(floor.getArticleID());
-        floor.setFloorNumber(articleDAO.getFloors(floor.getArticleID()));
+    public void addFloor(Floor floor) {//逻辑上应该在插入楼层成功后再主题楼层数+1
+        floor.setFloorNumber(articleDAO.getFloors(floor.getArticleID())+1);
         floorDAO.addFloor(floor);
+        articleDAO.updateArticle(floor.getArticleID());
     }
 
     @Override
